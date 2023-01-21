@@ -15,6 +15,7 @@ public class RegisterPage extends Throwable {
     private final By  buttonRegister = By.xpath(".//button[text()='Зарегистрироваться']");
     private final By errorMessage = By.xpath(".//p[text()='Некорректный пароль']");
     private final By linkEnter = By.xpath(".//a[text()='Войти']");
+    private final By buttonPersonalAccount= By.xpath(".//p[text()='Личный Кабинет']");
     private final WebDriver driver;
     public RegisterPage(WebDriver driver) {
         this.driver = driver;
@@ -48,5 +49,8 @@ public class RegisterPage extends Throwable {
     }
     public void clickLinkEnter() {
         driver.findElement(linkEnter).click();
+    }
+    public void clickButtonPersonalAccount() {
+        driver.findElement(buttonPersonalAccount).click();
     }
 }
