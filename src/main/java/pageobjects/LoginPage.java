@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
+    private final String LOGIN_PAGE = "https://stellarburgers.nomoreparties.site/login";
     private final By emailInputField = By.xpath("//label[text()='Email']/../input");
     private final By passwordInputField = By.xpath("//label[text()='Пароль']/../input");
     private final By buttonEnter = By.xpath(".//button[text()='Войти']");
@@ -34,5 +35,8 @@ public class LoginPage {
     public void waitingTextButton(String textExpected) {
         new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.textToBePresentInElementLocated(textButton, textExpected));
+    }
+    public void openLoginPage() {
+        driver.get(LOGIN_PAGE);
     }
 }
