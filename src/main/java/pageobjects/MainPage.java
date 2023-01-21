@@ -27,4 +27,8 @@ public class MainPage {
         new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.textToBePresentInElementLocated(textButton, textExpected));
     }
+    public void goToPersonalAccountPage() {
+        openMainPage();
+        clickButtonPersonalAccount();
+    }
 }

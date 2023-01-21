@@ -27,5 +27,10 @@ public class OrderFeedPage {
     public void clickButtonPersonalAccount() {
         driver.findElement(buttonPersonalAccount).click();
     }
+
+    public void goToPersonalAccountPage() {
+        openOrderFeedPage();
+        clickButtonPersonalAccount();
+    }
 }
 

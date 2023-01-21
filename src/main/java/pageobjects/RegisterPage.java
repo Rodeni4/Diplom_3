@@ -53,4 +53,15 @@ public class RegisterPage extends Throwable {
     public void clickButtonPersonalAccount() {
         driver.findElement(buttonPersonalAccount).click();
     }
+
+    public void goToPersonalAccountPage() {
+        openRegisterPage();
+        clickButtonPersonalAccount();
+    }
+    public void stepsRegistration(String name, String email, String password) {
+        openRegisterPage();
+        fillingFieldsRegisterPage(name, email, password);
+        clickButtonRegister();
+
+    }
 }

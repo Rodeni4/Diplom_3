@@ -27,4 +27,9 @@ public class PasswordRecoveryPage {
     public void clickButtonPersonalAccount() {
         driver.findElement(buttonPersonalAccount).click();
     }
+
+    public void goToPersonalAccountPage() {
+        openPasswordRecoverPage();
+        clickButtonPersonalAccount();
+    }
 }

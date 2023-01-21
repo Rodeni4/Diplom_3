@@ -11,81 +11,57 @@ import pageobjects.*;
 
 
 public class PersonalAccountTest {
-    private String textExpected;
+    private final String textExpected = "Войти";
+    private WebDriver driver;
+    private MainPage objMainPage;
+    private LoginPage objLoginPage;
+    private RegisterPage objRegisterPage;
+    private PasswordRecoveryPage objPasswordRecoveryPage;
+    private OrderFeedPage objOrderFeedPage;
     @Before
     public void startUp() {
         WebDriverManager.chromedriver().setup();
-        textExpected = "Войти";
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments();
+        driver = new ChromeDriver(options);
+        objMainPage = new MainPage(driver);
+        objLoginPage = new LoginPage(driver);
+        objRegisterPage = new RegisterPage(driver);
+        objOrderFeedPage = new OrderFeedPage(driver);
+        objPasswordRecoveryPage = new PasswordRecoveryPage(driver);
     }
-
-    private WebDriver driver;
 
     @Test
     @DisplayName("Переход по клику на «Личный кабинет», с главной страницы")
     @Description("Переход выполнен, видим кнопку: Войти")
     public void MainPageGoToSuccessfullyPersonalAccount() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments();
-        driver = new ChromeDriver(options);
-
-        MainPage objMainPage = new MainPage(driver);
-        objMainPage.openMainPage();
-        objMainPage.clickButtonPersonalAccount();
-
-        LoginPage objLoginPage = new LoginPage(driver);
-        objLoginPage.waitingTextButton(textExpected);
+        objMainPage.goToPersonalAccountPage();
     }
 
     @Test
     @DisplayName("Переход по клику на «Личный кабинет», со страницы Регистрации")
     @Description("Переход выполнен, видим кнопку: Войти")
     public void RegisterPageGoToSuccessfullyPersonalAccount() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments();
-        driver = new ChromeDriver(options);
-
-        RegisterPage objRegisterPage = new RegisterPage(driver);
-        objRegisterPage.openRegisterPage();
-        objRegisterPage.clickButtonPersonalAccount();
-
-        LoginPage objLoginPage = new LoginPage(driver);
-        objLoginPage.waitingTextButton(textExpected);
+        objRegisterPage.goToPersonalAccountPage();
     }
 
     @Test
     @DisplayName("Переход по клику на «Личный кабинет», со страницы Восстановление пароля")
     @Description("Переход выполнен, видим кнопку: Войти")
     public void PasswordRecoveryPageGoToSuccessfullyPersonalAccount() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments();
-        driver = new ChromeDriver(options);
-
-        PasswordRecoveryPage objPasswordRecoveryPage = new PasswordRecoveryPage(driver);
-        objPasswordRecoveryPage.openPasswordRecoverPage();
-        objPasswordRecoveryPage.clickButtonPersonalAccount();
-
-        LoginPage objLoginPage = new LoginPage(driver);
-        objLoginPage.waitingTextButton(textExpected);
+        objPasswordRecoveryPage.goToPersonalAccountPage();
     }
 
     @Test
     @DisplayName("Переход по клику на «Личный кабинет», со страницы Лента заказов")
     @Description("Переход выполнен, видим кнопку: Войти")
     public void OrderFeedPageGoToSuccessfullyPersonalAccount() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments();
-        driver = new ChromeDriver(options);
-
-        OrderFeedPage objOrderFeedPage = new OrderFeedPage(driver);
-        objOrderFeedPage.openOrderFeedPage();
-        objOrderFeedPage.clickButtonPersonalAccount();
-
-        LoginPage objLoginPage = new LoginPage(driver);
-        objLoginPage.waitingTextButton(textExpected);
+        objOrderFeedPage.goToPersonalAccountPage();
     }
 
     @After
     public void teardown() {
+        objLoginPage.waitingTextButton(textExpected);
         driver.quit();
     }
 }

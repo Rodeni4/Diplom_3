@@ -9,7 +9,6 @@ public class LoginPage {
     private final By emailInputField = By.xpath("//label[text()='Email']/../input");
     private final By passwordInputField = By.xpath("//label[text()='Пароль']/../input");
     private final By buttonEnter = By.xpath(".//button[text()='Войти']");
-    private final By linkPasswordRecovery = By.xpath(".//a[text()='Восстановить пароль']");
     private final By textButton = By.xpath((".//button[text()='Войти']"));
     private final WebDriver driver;
     public LoginPage(WebDriver driver) {
@@ -32,11 +31,6 @@ public class LoginPage {
     public void clickButtonEnter() {
         driver.findElement(buttonEnter).click();
     }
-    public void clickLinkPasswordRecovery()  {
-        waitingForElement(linkPasswordRecovery);
-        driver.findElement(linkPasswordRecovery).click();
-    }
-
     public void waitingTextButton(String textExpected) {
         new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.textToBePresentInElementLocated(textButton, textExpected));

@@ -19,9 +19,16 @@ public class RegisterTest {
     private String password;
     private String incorrectPassword;
     private String textExpected;
+    private RegisterPage objRegisterPage;
+
     @Before
     public void startUp() {
         WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments();
+        driver = new ChromeDriver(options);
+        objRegisterPage = new RegisterPage(driver);
+
         name = "name" + generateString();
         email = generateString() + "@yandex.ru";
     }
@@ -31,17 +38,10 @@ public class RegisterTest {
     @DisplayName("Успешная регистрация")
     @Description("Вводим пароль 6 символов, видим кнопку: Оформить заказ")
     public void SuccessfulRegistration() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments();
-        driver = new ChromeDriver(options);
-
         password = generateString().substring(0,6);
         textExpected = "Оформить заказ";
 
-        RegisterPage objRegisterPage = new RegisterPage(driver);
-        objRegisterPage.openRegisterPage();
-        objRegisterPage.fillingFieldsRegisterPage(name, email, password);
-        objRegisterPage.clickButtonRegister();
+        objRegisterPage.stepsRegistration(name, email, password);
 
         LoginPage objLoginPage = new LoginPage(driver);
         objLoginPage.fillingFieldsLoginPage(email, password);
@@ -55,17 +55,10 @@ public class RegisterTest {
     @DisplayName("Ошибка для некорректного пароля")
     @Description("Вводим пароль 5 символов, выдим сообщение: Некорректный пароль")
     public void NoSuccessfulRegistrationIncorrectPassword() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments();
-        driver = new ChromeDriver(options);
-
         incorrectPassword = generateString().substring(0,5);
         textExpected = "Некорректный пароль";
 
-        RegisterPage objRegisterPage = new RegisterPage(driver);
-        objRegisterPage.openRegisterPage();
-        objRegisterPage.fillingFieldsRegisterPage(name, email, incorrectPassword);
-        objRegisterPage.clickButtonRegister();
+        objRegisterPage.stepsRegistration(name, email, incorrectPassword);
         objRegisterPage.waitErrorMessage(textExpected);
     }
 
