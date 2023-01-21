@@ -6,8 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProfilePage {
-    private By textProfile = By.xpath(".//a[text()='Профиль']");
-    private WebDriver driver;
+    private final By textProfile = By.xpath(".//a[text()='Профиль']");
+    private final WebDriver driver;
 
     public  ProfilePage(WebDriver driver) {
         this.driver = driver;

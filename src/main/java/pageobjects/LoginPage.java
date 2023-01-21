@@ -6,10 +6,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
-    private By emailInputField = By.xpath("//label[text()='Email']/../input");
-    private By passwordInputField = By.xpath("//label[text()='Пароль']/../input");
-    private By buttonEnter = By.xpath(".//button[text()='Войти']");
-    private WebDriver driver;
+    private final By emailInputField = By.xpath("//label[text()='Email']/../input");
+    private final By passwordInputField = By.xpath("//label[text()='Пароль']/../input");
+    private final By buttonEnter = By.xpath(".//button[text()='Войти']");
+    private final By linkPasswordRecovery = By.xpath(".//a[text()='Восстановить пароль']");
+    private final WebDriver driver;
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -29,5 +30,9 @@ public class LoginPage {
     }
     public void clickButtonEnter() {
         driver.findElement(buttonEnter).click();
+    }
+    public void clickLinkPasswordRecovery()  {
+        waitingForElement(linkPasswordRecovery);
+        driver.findElement(linkPasswordRecovery).click();
     }
 }

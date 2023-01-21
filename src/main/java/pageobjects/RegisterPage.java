@@ -7,18 +7,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.UUID;
 
-public class RegisterPage {
+public class RegisterPage extends Throwable {
     private final String REGISTER_PAGE = "https://stellarburgers.nomoreparties.site/register";
-    private By nameInputField = By.xpath("//label[text()='Имя']/../input");
-    private By emailInputField = By.xpath("//label[text()='Email']/../input");
-    private By passwordInputField = By.xpath("//label[text()='Пароль']/../input");
-    private By  buttonRegister = By.xpath(".//button[text()='Зарегистрироваться']");
-    private By errorMessage = By.xpath(".//p[text()='Некорректный пароль']");
-    private WebDriver driver;
+    private final By nameInputField = By.xpath("//label[text()='Имя']/../input");
+    private final By emailInputField = By.xpath("//label[text()='Email']/../input");
+    private final By passwordInputField = By.xpath("//label[text()='Пароль']/../input");
+    private final By  buttonRegister = By.xpath(".//button[text()='Зарегистрироваться']");
+    private final By errorMessage = By.xpath(".//p[text()='Некорректный пароль']");
+    private final By linkEnter = By.xpath(".//a[text()='Войти']");
+    private final WebDriver driver;
     public RegisterPage(WebDriver driver) {
         this.driver = driver;
     }
-    public void openPage() {
+    public void openRegisterPage() {
         driver.get(REGISTER_PAGE);
     }
     public void fillingFieldsRegisterPage(String name, String email, String password) {
@@ -44,5 +45,8 @@ public class RegisterPage {
     public void waitErrorMessage(String textExpected) {
         new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.textToBePresentInElementLocated(errorMessage, textExpected));
+    }
+    public void clickLinkEnter() {
+        driver.findElement(linkEnter).click();
     }
 }

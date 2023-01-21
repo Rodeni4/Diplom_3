@@ -9,7 +9,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pageobjects.LoginPage;
 import pageobjects.MainPage;
-import pageobjects.ProfilePage;
 import pageobjects.RegisterPage;
 
 import static pageobjects.RegisterPage.generateString;
@@ -20,7 +19,6 @@ public class RegisterTest {
     private String password;
     private String incorrectPassword;
     private String textExpected;
-
     @Before
     public void startUp() {
         WebDriverManager.chromedriver().setup();
@@ -31,17 +29,17 @@ public class RegisterTest {
 
     @Test
     @DisplayName("Успешная регистрация")
-    @Description("Пользователь может зарегестрироваться и перейти в Профиль")
+    @Description("Вводим пароль 6 символов, видим кнопку: Оформить заказ")
     public void SuccessfulRegistration() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments();
         driver = new ChromeDriver(options);
 
         password = generateString().substring(0,6);
-        textExpected = "Профиль";
+        textExpected = "Оформить заказ";
 
         RegisterPage objRegisterPage = new RegisterPage(driver);
-        objRegisterPage.openPage();
+        objRegisterPage.openRegisterPage();
         objRegisterPage.fillingFieldsRegisterPage(name, email, password);
         objRegisterPage.clickButtonRegister();
 
@@ -50,15 +48,12 @@ public class RegisterTest {
         objLoginPage.clickButtonEnter();
 
         MainPage objMainPage = new MainPage(driver);
-        objMainPage.clickButtonPersonalAccount();
-
-        ProfilePage objProfilePage = new ProfilePage(driver);
-        objProfilePage.waitingTextProfile(textExpected);
+        objMainPage.waitingTextButton(textExpected);
     }
 
     @Test
     @DisplayName("Ошибка для некорректного пароля")
-    @Description("Минимальный пароль — шесть символов.")
+    @Description("Вводим пароль 5 символов, выдим сообщение: Некорректный пароль")
     public void NoSuccessfulRegistrationIncorrectPassword() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments();
@@ -68,7 +63,7 @@ public class RegisterTest {
         textExpected = "Некорректный пароль";
 
         RegisterPage objRegisterPage = new RegisterPage(driver);
-        objRegisterPage.openPage();
+        objRegisterPage.openRegisterPage();
         objRegisterPage.fillingFieldsRegisterPage(name, email, incorrectPassword);
         objRegisterPage.clickButtonRegister();
         objRegisterPage.waitErrorMessage(textExpected);
