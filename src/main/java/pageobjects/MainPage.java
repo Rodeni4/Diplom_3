@@ -10,6 +10,10 @@ public class MainPage {
     private final By buttonPersonalAccount= By.xpath(".//p[text()='Личный Кабинет']");
     private final By textButton = By.xpath((".//button[text()='Оформить заказ']"));
     private final By buttonLogin = By.xpath(".//button[text()='Войти в аккаунт']");
+    private final By linkActive = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc')]");
+    private final By linkSauces = By.xpath(".//span[text()='Соусы']");
+    private final By linkFillings = By.xpath(".//span[text()='Начинки']");
+    private final By linkBreads = By.xpath(".//span[text()='Булки']");
     private final WebDriver driver;
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -30,5 +34,18 @@ public class MainPage {
     public void goToPersonalAccountPage() {
         openMainPage();
         clickButtonPersonalAccount();
+    }
+    public void clickLinkSauces() {
+        driver.findElement(linkSauces).click();
+    }
+    public void clickLinkFillings() {
+        driver.findElement(linkFillings).click();
+    }
+    public void clickLinkBreads() {
+        driver.findElement(linkBreads).click();
+    }
+    public void waitingTextLink(String textExpected) {
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.textToBePresentInElementLocated(linkActive, textExpected));
     }
 }
